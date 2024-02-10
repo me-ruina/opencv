@@ -1,12 +1,14 @@
 import cv2
 
-
+cap = cv2.VideoCapture('dvor1.mp4')
+ret, frame = cap.read()
+bbox = cv2.selectROI('Frame', frame, fromCenter=False, showCrosshair=True)
+tracker = cv2.legacy.TrackerMedianFlow_create()
+tracker.init(frame, bbox)
+cap.release()
+tracker.update(frame)
 def capture_object_for_tracking(video_path):
-    cap = cv2.VideoCapture(video_path)
-    ret, frame = cap.read()
-    bbox = cv2.selectROI('Frame', frame, fromCenter=False, showCrosshair=True)
-    tracker = cv2.legacy.TrackerMedianFlow_create()
-    tracker.init(frame, bbox)
+    global cap, ret, frame, bbox, tracker
 
     while True:
         ret, frame = cap.read()
@@ -35,5 +37,3 @@ def capture_object_for_tracking(video_path):
     cap.release()
     cv2.destroyAllWindows()
 
-
-capture_object_for_tracking('dvor1.mp4')
