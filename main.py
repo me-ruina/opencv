@@ -1,7 +1,7 @@
 import cv2
 
 # Захват видеопотока с веб-камеры
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture('dvor.mp4')
 
 while True:
     # Считывание кадра с веб-камеры
